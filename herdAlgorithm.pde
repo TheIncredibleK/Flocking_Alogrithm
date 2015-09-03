@@ -1,6 +1,7 @@
 void setup() {
   int amt = 200;
-  size(500, 500);
+  frameRate(30);
+  size(600,600);
   insects = new insect[amt];
   for (int i = 0; i < amt; i++) {
     insects[i] = new insect(random(0, width), random(0, height), 3, random(0, 90));
@@ -66,3 +67,38 @@ PVector alignment(insect i, ArrayList<insect> flock) {
   
 }
 
+PVector keepOnScreen(insect i) {
+  //Some variables to hold the maximum and minimum positions allowed on screen
+  int minX, maxX, minY, maxY;
+  //PVector to return for addition
+  PVector keep = new PVector(0,0);
+  //Initalisation
+  minX = 10;
+  minY = 10;
+  maxX = (height-10);
+  maxY = (width-10);
+  
+  //The ifs checking their bounds
+  if(i.pos.x < minX ) {
+    keep.x = 10;
+  }
+  if(i.pos.x > maxX) {
+    keep.x = -10;
+  }
+  if(i.pos.y > maxY) {
+    keep.y = -10;
+  }
+  if(i.pos.y < minY) {
+    keep.y = 10;
+  }
+  
+  return keep;
+}
+
+
+
+void keyPressed() {
+  for(insect i: insects) {
+    println(i.pos);
+  }
+}

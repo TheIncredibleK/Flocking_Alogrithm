@@ -12,10 +12,13 @@ void getFlock(insect i) {
   PVector rule1 = cohesion(i, flock);
   PVector rule2 = seperation(i, flock);
   PVector rule3 = alignment(i, flock);
+  PVector rule4 = keepOnScreen(i);
   
   i.vel.add(rule1);
   i.vel.add(rule2);
   i.vel.add(rule3);
+  i.vel.add(rule4);
+  i.vel.limit(2);
   i.pos.add(i.vel);
 }
 
