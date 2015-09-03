@@ -4,7 +4,8 @@
 //3. Allignment: Steer towards average heading of neighbours
 
 class insect {
-  float x,y;
+  PVector pos;
+  PVector vel;
   int size;
   float speed;
   float theta;
@@ -13,8 +14,8 @@ class insect {
   
   //Basic constructor
    insect(float x, float y, int size, float theta) {
-    this.x = x;
-    this.y = y;
+    this.pos = new PVector(x, y);
+    this.vel = new PVector(0,0);
     this.size= size;
     speed = .5;
     this.theta = theta;
@@ -25,32 +26,31 @@ class insect {
   void display() {
     stroke(255);
     noFill();
-    ellipse(x, y, size, size);
-    move();
+    ellipse(pos.x, pos.y, size, size);
     check();
   }
   
   //Moves it across the screen acording to the direction of a circle it's 'facing'
-  void move() 
+  /*void move() 
   {
     float newx = x + ((size/2) * (cos(radians(theta))*speed));
     float newy = y + ((size/2) * (sin(radians(theta))*speed));
     
     x = newx;
     y = newy;
-  }
+  }*/
   void check() {
-    if(this.x < 0) {
-      this.x = width;
+    if(this.pos.x < 0) {
+      this.pos.x = width;
     }
-    if(this.x > width) {
-      this.x = 0;
+    if(this.pos.x > width) {
+      this.pos.x = 0;
     }
-    if(this.y > height) {
-      this.y = 0;
+    if(this.pos.y > height) {
+      this.pos.y = 0;
     }
-    if(this.y < 0) {
-      this.y = height;
+    if(this.pos.y < 0) {
+      this.pos.y = height;
     }
   }
 }

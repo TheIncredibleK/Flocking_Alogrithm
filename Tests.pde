@@ -1,32 +1,28 @@
 //Gets the flock objects for each member of insects
-void getFlock() {
-  for(insect i : insects) {
-    ArrayList<insect> flock = new ArrayList<insect>();
-    for(insect j : insects) {
-      if( i != j ) {
-        if(dist(i.x, i.y, j.x, j.y) < 50) {
-          
-          flock.add(j);
-        }
-      }
-    }
+void getFlock(insect i) {
+  ArrayList<insect> flock = new ArrayList<insect>();
+  for (insect j : insects) {
+    if ( i != j ) {
+      if (dist(i.pos.x, i.pos.y, j.pos.x, j.pos.y) < 50) {
 
-    //seperation(i, flock);
-    alignment(i, flock);
-  }
-}
-//Gets the non flock members for each insect in insects
-void getNonFlock() {
-  for(insect i : insects) {
-    ArrayList<insect> Nonflock = new ArrayList<insect>();
-    for(insect j : insects) {
-      if( i != j ) {
-        if(dist(i.x, i.y, j.x, j.y) > 25) {
-          Nonflock.add(j);
-        }
+        flock.add(j);
       }
     }
-  
-  //cohesion(i, Nonflock);
   }
+  PVector rule1 = cohesion(i, flock);
+  PVector rule2 = seperation(i, flock);
+  PVector rule3 = alignment(i, flock);
+  
+  i.vel.add(rule1);
+  i.vel.add(rule2);
+  i.vel.add(rule3);
+  i.pos.add(i.vel);
 }
+
+
+
+  
+  
+
+
+
